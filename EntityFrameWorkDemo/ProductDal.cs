@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EntityFrameWorkDemo
 {
-    class ProductDal
+    public class ProductDal
     {
 
         public List<Product> GetAll()
@@ -15,6 +15,37 @@ namespace EntityFrameWorkDemo
             using (ETradeContext context = new ETradeContext())
             {
                 return context.Products.ToList();
+            }
+        }
+        public List<Product> GetByName(string key)
+        {
+            using (ETradeContext context = new ETradeContext())
+            {
+                return context.Products.Where(p=>p.Name.Contains(key)).ToList();
+            }
+        }
+        //Belirtilen fiyattan büyük olan ürünleri getirme
+        public List<Product> GetByUnitPrice(decimal price)
+        {
+            using (ETradeContext context = new ETradeContext())
+            {
+                return context.Products.Where(p => p.UnitPrice>=price).ToList();
+            }
+        }
+        //İki fiyat arasında olan ürünleri bulma
+        public List<Product> GetByUnitPrice(decimal min,decimal max)
+        {
+            using (ETradeContext context = new ETradeContext())
+            {
+                return context.Products.Where(p => p.UnitPrice >= min && p.UnitPrice<=max).ToList();
+            }
+        }
+
+        public Product GetById(int id)
+        {
+            using (ETradeContext context = new ETradeContext())
+            {
+                return context.Products.FirstOrDefault(p=>p.Id == id);
             }
         }
 
