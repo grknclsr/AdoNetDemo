@@ -65,5 +65,10 @@ namespace AdoNetDemo
             dgwProducts.DataSource = _productDal.GetAll();
             MessageBox.Show("Deleted!");
         }
+
+        private void dgwProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
